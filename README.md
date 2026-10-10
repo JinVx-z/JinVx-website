@@ -29,7 +29,7 @@ npm run astro -- dev stop
 
 ## 先替换这些信息
 
-编辑 `src/config/site.ts`，统一设置姓名、网站 URL、描述、自我介绍、定位、导航、GitHub、公开邮箱与可选所在地。空的联系方式不会生成假链接；设置真实 GitHub 地址后即可显示入口。还要替换 `src/pages/about.astro` 中的兴趣方向与个人正文，再将 `demoProfile` 改为 `false`。
+编辑 `src/config/site.ts`，统一设置姓名、头像路径、网站 URL、描述、自我介绍、定位、导航、GitHub、公开邮箱与可选所在地。GitHub 已配置为 `JinVx-z`，当前头像来自该账号的公开头像，替换 `public/avatar.png` 即可更新。空的联系方式不会生成假链接。还要替换 `src/pages/about.astro` 中的兴趣方向与个人正文，再将 `demoProfile` 改为 `false`。
 
 默认 URL 为 `https://example.com`，此时页面保持 `noindex`，避免演示版本被搜索引擎收录。发布前改为实际 Vercel 地址或自有域名，并重新构建。`public/` 存放公开静态资源，favicon 与默认分享图也可以按个人品牌替换。
 

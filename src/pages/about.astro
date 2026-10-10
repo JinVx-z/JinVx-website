@@ -17,9 +17,13 @@ import Icon from '../components/Icon.astro';
   </section>
   <div class="about-layout">
     <aside class="profile-panel">
-      <div class="avatar-monogram" aria-hidden="true">
-        J<span>.</span>
-      </div>
+      <img
+        class="about-avatar"
+        src={site.avatar}
+        alt={`${site.author} 的头像`}
+        width="74"
+        height="74"
+      />
       <h2>{site.author}</h2>
       <p class="mono">{site.role}</p>
       {site.location && <p>{site.location}</p>}

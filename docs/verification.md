@@ -7,4 +7,30 @@
 - 浏览器检查通过：深浅色切换、跨页主题保持、Blog/Notes 标签筛选、手机导航展开与收起、文章目录跳转、代码块与表格排版。桌面和手机布局已观察，检查页面无横向溢出。
 - [浅色首页截图](./previews/home-light.jpg)、[深色首页截图](./previews/home-dark.jpg)、[手机首页截图](./previews/home-mobile.jpg)、[生产首页截图](./previews/production-home.jpg)。
 
-网站仍是本地项目，未创建远程 GitHub 仓库或部署至 Vercel。个人信息与全部七篇内容保留演示标记，发布前按 README 替换。
+个人介绍与全部七篇内容保留演示标记，发布前按 README 替换。
+
+## 首页布局修订
+
+根据用户截图与注释，改为居中头像和名字、简洁介绍与 Blog / Notes 文字列表，删除首页代码装饰、Agent 流程卡和底部星形元素。GitHub 已设为 `https://github.com/JinVx-z`，头像为该账号的公开头像，本地保存到 `public/avatar.png`。
+
+- `npm run verify` 通过：Astro/TypeScript 无错误或警告，构建 13 个页面，250 个本地链接与资源验证通过。
+- 桌面与 390px 手机布局无横向溢出；导航字号增大，手机菜单可展开与收起；头像加载、GitHub 链接和深浅色切换正常。
+- 修订后的 [浅色首页](./previews/home-revised-light.jpg)、[深色首页](./previews/home-revised-dark.jpg)、[手机首页](./previews/home-revised-mobile.jpg)。
+
+## 蓝色配色试版
+
+两种模式均采用顶部较亮、向下逐渐变深的蓝色背景。首页文章与笔记使用紧凑的 16px 圆角边框，链接悬停统一为天蓝色，列表增加轻微提亮与阴影。
+
+- `npm run verify` 通过，13 个页面、250 个本地链接与资源正常。
+- 两种模式的渐变已确认；桌面列表单行约 52px 高，390px 手机布局无横向溢出。
+- [较亮蓝色](./previews/home-blue-light.jpg)、[较深蓝色](./previews/home-blue-dark.jpg)、[手机列表](./previews/home-blue-mobile.jpg)。
+
+## 渐变范围与明暗修订
+
+亮色改为清透浅蓝到纯白，暗色改为灰蓝雾感到纯黑。首页渐变只覆盖头像与 About；容器随内容高度伸缩，在 Blog 开始处结束，以下背景保持纯白或纯黑。
+
+- Astro/TypeScript 检查及生产构建通过，250 个本地链接与资源正常。
+- 桌面与手机均确认渐变底端和 Blog 起点重合，无横向溢出。
+- [浅蓝到白](./previews/home-mist-light.jpg)、[雾蓝到黑](./previews/home-mist-dark.jpg)。
+
+暗色后续柔化：增加深蓝灰过渡，尾部逐渐减缓至纯黑，终点仍为 Blog 起点。生产构建与资源验证通过；[柔化后的暗色效果](./previews/home-mist-dark-soft.jpg)。
