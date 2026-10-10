@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostRow from './PostRow.astro';
+import { getWriting } from '../lib/content';
+interface Props {
+  collection: 'blog' | 'notes';
+  title: string;
+  subtitle: string;
+  description: string;
+}
+const { collection, title, subtitle, description } = Astro.props;
+const entries = await getWriting(collection);
+const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="page-heading">
+    <p class="eyebrow">{subtitle}</p>
+    <h1>
+      {title}
+      <span class="accent">.</span>
+    </h1>
+    <p>{description}</p>
+    <span class="page-count mono">
+      {String(entries.length).padStart(2, '0')}{' '}
+      {collection === 'blog' ? 'ARTICLES' : 'NOTES'} / 持续更新
+    </span>
+  </section>
+  <div class="writing-toolbar">
+    <div class="filter-buttons" role="group" aria-label="按标签筛选">
+      <button class="filter-button active" data-filter="" aria-pressed="true">
+        全部
+      </button>
+      {tags.map((tag) => (
+        <button class="filter-button" data-filter={tag} aria-pressed="false">
+          {tag}
+        </button>
+      ))}
+    </div>
+    <a class="text-link" href="/rss.xml">
+      订阅 RSS ↗
+    </a>
+  </div>
+  <div class="post-list archive-list">
+    {entries.map((entry) => (
+      <PostRow entry={entry} collection={collection} />
+    ))}
+  </div>
+  {entries.length === 0 && (
+    <p class="empty-state">这里还没有内容。下一个想法，值得记下来。</p>
+  )}
+  <p
+    class="archive-caption"
+    role="status"
+    aria-live="polite"
+    id="filter-status"
+  >
+    共 {entries.length} 篇{collection === 'blog' ? '文章' : '笔记'}
+  </p>
+</BaseLayout>
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const entries = document.querySelectorAll<HTMLElement>('[data-entry]');
+  buttons.forEach((button) =>
+    button.addEventListener('click', () => {
+      const tag = button.dataset.filter ?? '';
+      let count = 0;
+      buttons.forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      entries.forEach((entry) => {
+        const tags: string[] = JSON.parse(entry.dataset.tags ?? '[]');
+        entry.hidden = Boolean(tag && !tags.includes(tag));
+        if (!entry.hidden) count++;
+      });
+      const status = document.querySelector('#filter-status');
+      if (status)
+        status.textContent = `${tag ? `「${tag}」· ` : ''}共 ${count} 篇内容`;
+    }),
+  );
+</script>

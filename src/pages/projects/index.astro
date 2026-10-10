@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/content';
+const projects = await getProjects();
+---
+
+<BaseLayout
+  title="Projects"
+  description="从小想法到可运行的作品，探索 Personal Agent 与 Web 开发。"
+>
+  <section class="page-heading">
+    <p class="eyebrow">LEARNING BY BUILDING</p>
+    <h1>
+      Projects<span class="accent">.</span>
+    </h1>
+    <p>用项目回答问题。这里放着正在探索的方向，以及一点点长出来的作品。</p>
+    <span class="page-count mono">
+      {String(projects.length).padStart(2, '0')} PROJECTS / 一次做好一件小事
+    </span>
+  </section>
+  <div class="projects-stack">
+    {projects.map((entry) => (
+      <ProjectCard entry={entry} featured={entry.data.featured} />
+    ))}
+    {projects.length === 0 && <p class="empty-state">新项目正在路上。</p>}
+  </div>
+  <p class="archive-caption">
+    标有「演示」的项目介绍仅用于展示页面，请按实际进展更新。
+  </p>
+</BaseLayout>

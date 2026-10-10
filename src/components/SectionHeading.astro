@@ -1,0 +1,23 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  subtitle?: string;
+  href?: string;
+  linkText?: string;
+}
+const { number, title, subtitle, href, linkText = '查看全部' } = Astro.props;
+---
+
+<div class="section-heading">
+  <div class="flex items-baseline gap-3">
+    <span class="section-number">{number}</span>
+    <h2>{title}</h2>
+    {subtitle && <span class="section-subtitle">{subtitle}</span>}
+  </div>
+  {href && (
+    <a class="text-link" href={href}>
+      {linkText} <span aria-hidden="true">↗</span>
+    </a>
+  )}
+</div>

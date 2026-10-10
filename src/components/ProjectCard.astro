@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import AgentVisual from './AgentVisual.astro';
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  featured?: boolean;
+}
+const { entry, featured = false } = Astro.props;
+---
+
+<article class:list={['project-card', { 'featured-project': featured }]}>
+  <div class="project-copy">
+    <div class="project-eyebrow">
+      <span>{featured ? 'CURRENT FOCUS' : 'SIDE PROJECT'}</span>
+      <span class="status-label">
+        <span class="status-dot"></span>
+        {entry.data.status}
+      </span>
+    </div>
+    <h3>
+      <a href={`/projects/${entry.id}/`}>
+        {entry.data.title}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </h3>
+    <p>{entry.data.description}</p>
+    <div class="flex items-center gap-2 flex-wrap">
+      {entry.data.tags.map((tag) => (
+        <span class="tag">{tag}</span>
+      ))}
+      {entry.data.demo && <span class="demo-badge">演示项目介绍</span>}
+    </div>
+    <a class="text-link project-link" href={`/projects/${entry.id}/`}>
+      了解项目 <span aria-hidden="true">→</span>
+    </a>
+  </div>
+  {entry.data.visual === 'agent' ? (
+    <AgentVisual compact />
+  ) : (
+    <div class="website-visual" aria-hidden="true">
+      <div class="mini-browser">
+        <div class="mini-bar">
+          <span>jinvx /</span>
+          <span>•••</span>
+        </div>
+        <strong>
+          Build.
+          <br />
+          Learn.
+          <br />
+          <span>Share.</span>
+        </strong>
+        <div class="mini-lines">
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <span class="mono">A SMALL CORNER OF THE WEB</span>
+    </div>
+  )}
+</article>

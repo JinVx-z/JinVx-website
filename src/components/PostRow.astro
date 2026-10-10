@@ -1,0 +1,38 @@
+---
+import type { Writing } from '../lib/content';
+import { formatDate, readingTime } from '../lib/content';
+interface Props {
+  entry: Writing;
+  collection: 'blog' | 'notes';
+}
+const { entry, collection } = Astro.props;
+---
+
+<a
+  href={`/${collection}/${entry.id}/`}
+  class="post-row"
+  data-entry
+  data-tags={JSON.stringify(entry.data.tags)}
+>
+  <div class="post-date">
+    <time datetime={entry.data.date.toISOString()}>
+      {formatDate(entry.data.date)}
+    </time>
+    <span>{readingTime(entry.body)} min read</span>
+  </div>
+  <div class="post-copy">
+    <div class="flex items-center gap-2 flex-wrap">
+      <h3>{entry.data.title}</h3>
+      {entry.data.demo && <span class="demo-badge">演示</span>}
+    </div>
+    <p>{entry.data.description}</p>
+    <div class="post-tags">
+      {entry.data.tags.map((tag) => (
+        <span>#{tag}</span>
+      ))}
+    </div>
+  </div>
+  <span class="row-arrow" aria-hidden="true">
+    ↗
+  </span>
+</a>

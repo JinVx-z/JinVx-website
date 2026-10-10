@@ -1,0 +1,63 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div
+  class:list={['agent-visual', { compact }]}
+  aria-label="Personal Agent 概念图：上下文、计划、人工确认和执行形成一个循环"
+  role="img"
+>
+  <div class="visual-top">
+    <span class="flex gap-1.5">
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
+    <span>personal-agent / workspace</span>
+    <span>↗</span>
+  </div>
+  <div class="agent-stage">
+    <div class="orbit orbit-one"></div>
+    <div class="orbit orbit-two"></div>
+    <svg
+      class="orbit-lines"
+      viewBox="0 0 400 260"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M92 75 200 130 305 67M200 130 95 203M200 130 307 204"
+        stroke="currentColor"
+        stroke-dasharray="4 5"
+      />
+    </svg>
+    <div class="agent-core">
+      <span>
+        J<span class="core-dot">.</span>
+      </span>
+      <small>AGENT</small>
+    </div>
+    <span class="orbit-node node-context">
+      <span>⌘</span> Context
+    </span>
+    <span class="orbit-node node-plan">
+      <span>≡</span> Plan
+    </span>
+    <span class="orbit-node node-review">
+      <span>✓</span> Review
+    </span>
+    <span class="orbit-node node-build">
+      <span>↗</span> Execute
+    </span>
+    <span class="visual-coordinate">[ 01 · HUMAN IN THE LOOP ]</span>
+  </div>
+  <div class="visual-bottom">
+    <span>
+      <span class="status-dot"></span> 从想法到行动
+    </span>
+    <span>concept sketch · v0.1</span>
+  </div>
+</div>

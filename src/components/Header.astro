@@ -1,0 +1,115 @@
+---
+import { site } from '../config/site';
+import Icon from './Icon.astro';
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="JinVx 首页">
+      <span class="brand-symbol">
+        j<span>.</span>
+      </span>
+      {site.name}
+      <span class="brand-slash">/</span>
+    </a>
+    <nav id="navigation" class="navigation" aria-label="主导航">
+      {site.navigation.map((item) => (
+        <a
+          href={item.href}
+          aria-current={
+            (item.href === '/' ? path === '/' : path.startsWith(item.href))
+              ? 'page'
+              : undefined
+          }
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="header-actions">
+      <button
+        id="theme-toggle"
+        class="icon-button"
+        type="button"
+        aria-label="切换深色模式"
+        aria-pressed="false"
+      >
+        <span class="sun-icon">
+          <Icon name="sun" />
+        </span>
+        <span class="moon-icon">
+          <Icon name="moon" />
+        </span>
+      </button>
+      <button
+        id="menu-toggle"
+        class="icon-button menu-toggle"
+        type="button"
+        aria-label="打开导航菜单"
+        aria-controls="navigation"
+        aria-expanded="false"
+      >
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
+<script>
+  const themeButton =
+    document.querySelector<HTMLButtonElement>('#theme-toggle');
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  let preference: string | null = null;
+  try {
+    preference = localStorage.getItem('jinvx-theme');
+  } catch {
+    /* 存储被禁用时依然可切换 */
+  }
+  function syncButton() {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    themeButton?.setAttribute('aria-pressed', String(dark));
+    themeButton?.setAttribute(
+      'aria-label',
+      dark ? '切换浅色模式' : '切换深色模式',
+    );
+  }
+  syncButton();
+  themeButton?.addEventListener('click', () => {
+    preference =
+      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = preference;
+    try {
+      localStorage.setItem('jinvx-theme', preference);
+    } catch {
+      /* 可用但不记忆 */
+    }
+    syncButton();
+  });
+  media.addEventListener('change', (event) => {
+    if (preference !== 'light' && preference !== 'dark') {
+      document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+      syncButton();
+    }
+  });
+  const menu = document.querySelector<HTMLButtonElement>('#menu-toggle');
+  const navigation = document.querySelector<HTMLElement>('#navigation');
+  function closeMenu() {
+    navigation?.classList.remove('is-open');
+    menu?.setAttribute('aria-expanded', 'false');
+    menu?.setAttribute('aria-label', '打开导航菜单');
+  }
+  menu?.addEventListener('click', () => {
+    const open = navigation?.classList.toggle('is-open') ?? false;
+    menu.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+      menu?.focus();
+    }
+  });
+  navigation
+    ?.querySelectorAll('a')
+    .forEach((link) => link.addEventListener('click', closeMenu));
+</script>

@@ -1,0 +1,30 @@
+---
+import { site } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<footer class="container site-footer">
+  <div>
+    <a href="/" class="footer-brand">
+      {site.name}
+      <span class="accent">.</span>
+    </a>
+    <p>{site.tagline}</p>
+  </div>
+  <div class="footer-right">
+    <div class="flex items-center gap-5">
+      <a href="/rss.xml">RSS ↗</a>
+      <a
+        href={site.github || '/about/#contact'}
+        class="inline-flex items-center gap-2"
+      >
+        <Icon name="github" size={15} />
+        {site.github ? 'GitHub' : 'GitHub · 待配置'}
+      </a>
+      <a href="/about/">About ↗</a>
+    </div>
+    <p>
+      © {new Date().getFullYear()} {site.author} · Built with Astro
+    </p>
+  </div>
+</footer>

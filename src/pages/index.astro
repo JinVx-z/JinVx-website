@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostRow from '../components/PostRow.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { getWriting, getProjects, formatDate } from '../lib/content';
+const [blog, notes, projects] = await Promise.all([
+  getWriting('blog'),
+  getWriting('notes'),
+  getProjects(),
+]);
+const featured =
+  projects.find((project) => project.data.featured) ?? projects[0];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">
+        <span class="status-dot"></span> A DEVELOPER'S DIGITAL GARDEN
+      </p>
+      <h1>
+        你好，我是{' '}
+        <span class="name-word">
+          {site.author}
+          <span class="accent">.</span>
+        </span>
+        <br />
+        <span class="hero-second">
+          构建、学习，
+          <br class="mobile-break" />
+          也记录。
+        </span>
+      </h1>
+      <p class="hero-description">{site.intro}</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="/projects/">
+          探索我的项目 <Icon name="arrow" size={17} />
+        </a>
+        <a class="github-link" href={site.github || '/about/#contact'}>
+          <Icon name="github" size={18} />
+          {site.github ? 'GitHub' : 'GitHub · 待配置'}
+          <span>↗</span>
+        </a>
+      </div>
+      <div class="hero-meta">
+        <span>AI AGENT</span>
+        <span>WEB DEVELOPMENT</span>
+        <span>LEARNING IN PUBLIC</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-grid"></div>
+      <span class="art-label">HELLO, WORLD_</span>
+      <div class="art-window">
+        <div class="art-window-bar">
+          <span>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          <span>~/jinvx</span>
+        </div>
+        <div class="art-code">
+          <span class="code-comment">// a little about me</span>
+          <p>
+            <span class="code-purple">const</span> developer{' '}
+            <span class="muted">= &lbrace;</span>
+          </p>
+          <p class="indent">
+            name: <span class="code-green">'{site.author}'</span>,
+          </p>
+          <p class="indent">
+            focus: <span class="code-green">'Personal Agent'</span>,
+          </p>
+          <p class="indent">
+            mode: <span class="code-green">'always learning'</span>
+          </p>
+          <p class="muted">&rbrace;;</p>
+          <div class="code-result">
+            <span class="accent">❯</span> build something meaningful
+            <span class="cursor"></span>
+          </div>
+        </div>
+      </div>
+      <div class="art-sticker">
+        <span>✳</span>
+        <span>
+          MAKE SMALL THINGS.
+          <br />
+          MAKE THEM WELL.
+        </span>
+      </div>
+      <span class="art-bottom">IDEAS → CODE → NOTES</span>
+    </div>
+  </section>
+  {site.demoProfile && (
+    <p class="demo-notice">
+      <span>i</span>个人介绍与标有「演示」的内容为可替换示例。
+      <a href="/about/#profile">了解更多 ↗</a>
+    </p>
+  )}
+  <section class="home-section">
+    <SectionHeading
+      number="01"
+      title="正在构建"
+      subtitle="Selected project"
+      href="/projects/"
+      linkText="全部项目"
+    />
+    {featured ? (
+      <ProjectCard entry={featured} featured />
+    ) : (
+      <p class="empty-state">新项目正在路上。</p>
+    )}
+  </section>
+  <section class="home-section">
+    <SectionHeading
+      number="02"
+      title="最近写下的"
+      subtitle="From the blog"
+      href="/blog/"
+      linkText="全部文章"
+    />
+    <div class="post-list">
+      {blog.slice(0, 3).map((entry) => (
+        <PostRow entry={entry} collection="blog" />
+      ))}
+      {blog.length === 0 && <p class="empty-state">第一篇文章正在酝酿中。</p>}
+    </div>
+  </section>
+  <section class="home-section">
+    <SectionHeading
+      number="03"
+      title="随手记"
+      subtitle="Notes & thoughts"
+      href="/notes/"
+      linkText="全部笔记"
+    />
+    <div class="notes-grid">
+      {notes.slice(0, 3).map((note) => (
+        <a class="note-card" href={`/notes/${note.id}/`}>
+          <div class="note-top">
+            <span class="note-kind">{note.data.kind}</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+          <h3>{note.data.title}</h3>
+          <p>{note.data.description}</p>
+          <div class="note-bottom">
+            <time datetime={note.data.date.toISOString()}>
+              {formatDate(note.data.date)}
+            </time>
+            {note.data.demo && <span class="demo-badge">演示</span>}
+          </div>
+        </a>
+      ))}
+      {notes.length === 0 && (
+        <p class="empty-state">留一点空间，给下一个想法。</p>
+      )}
+    </div>
+  </section>
+  <section class="closing-note">
+    <span class="closing-symbol" aria-hidden="true">
+      ✳
+    </span>
+    <div>
+      <h2>好东西，往往从一个小想法开始。</h2>
+      <p>这个网站也是。欢迎看看我的项目，或聊聊你的想法。</p>
+    </div>
+    <a class="text-link" href="/about/#contact">
+      打个招呼 <span>↗</span>
+    </a>
+  </section>
+</BaseLayout>
