@@ -87,7 +87,7 @@ const canonical = new URL(Astro.url.pathname, site.url);
       })();
     </script>
   </head>
-  <body>
+  <body class:list={{ 'reading-page': article }}>
     <a class="skip-link" href="#main">
       跳转到内容
     </a>

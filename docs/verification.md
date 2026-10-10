@@ -34,3 +34,11 @@
 - [浅蓝到白](./previews/home-mist-light.jpg)、[雾蓝到黑](./previews/home-mist-dark.jpg)。
 
 暗色后续柔化：增加深蓝灰过渡，尾部逐渐减缓至纯黑，终点仍为 Blog 起点。生产构建与资源验证通过；[柔化后的暗色效果](./previews/home-mist-dark-soft.jpg)。
+
+## 浮动导航与阅读配色
+
+顶部导航取消横向分界线，与背景衔接；下滑超过 32px 后收为圆角浮层，返回顶部后恢复。外层高度保持固定，收缩时正文不会跳动。博客与笔记详情使用独立的阅读配色：暗色从蓝灰缓缓过渡到炭黑，提示块、引用、代码块与表格使用低对比度表面。文章末尾的星形图标已删除。
+
+- `npm run verify` 通过：Astro/TypeScript 0 错误、0 警告、0 提示；13 个静态页面，250 个本地链接与资源正常。
+- 浏览器确认桌面导航收缩与恢复、深浅色切换；390px 手机端浮动导航和展开菜单无横向溢出。
+- [顶部导航](./previews/header-blended-top.jpg)、[滚动导航](./previews/header-floating-scroll.jpg)、[暗色文章](./previews/article-muted-dark.jpg)、[手机菜单](./previews/header-floating-mobile.jpg)。

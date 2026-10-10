@@ -53,6 +53,19 @@ const path = Astro.url.pathname;
   </div>
 </header>
 <script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  let scrolled = header?.classList.contains('is-scrolled') ?? false;
+  function syncScrollState() {
+    const next = window.scrollY > 32;
+    if (next !== scrolled) {
+      header?.classList.toggle('is-scrolled', next);
+      scrolled = next;
+    }
+  }
+  syncScrollState();
+  window.addEventListener('scroll', syncScrollState, { passive: true });
+  window.addEventListener('pageshow', syncScrollState);
+
   const themeButton =
     document.querySelector<HTMLButtonElement>('#theme-toggle');
   const media = window.matchMedia('(prefers-color-scheme: dark)');
