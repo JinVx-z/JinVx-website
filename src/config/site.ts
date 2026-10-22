@@ -1,7 +1,7 @@
 /** 发布前优先替换这里。空联系方式不会生成虚假的外链。 */
 export const site = {
   name: 'JinVx',
-  url: 'https://jin-vx-website.vercel.app', // 站点正式地址；不要带路径
+  url: 'https://www.jinvx.top', // 站点正式地址；不要带路径
   description:
     'JinVx 的数字花园：构建 Personal Agent，记录开发实践、学习笔记与日常思考。',
   language: 'zh-CN',

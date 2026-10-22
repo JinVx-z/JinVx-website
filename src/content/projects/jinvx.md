@@ -8,7 +8,7 @@ featured: false
 draft: false
 demo: false
 repository: 'https://github.com/JinVx-z/JinVx-website'
-website: 'https://jin-vx-website.vercel.app/'
+website: 'https://www.jinvx.top/'
 ---
 
 > 更新于 2026-10-22。你正在浏览的就是这个项目：网站已上线，内容与界面会随着我的开发和学习持续更新。
