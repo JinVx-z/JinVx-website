@@ -25,7 +25,9 @@ const projects = await getProjects();
     ))}
     {projects.length === 0 && <p class="empty-state">新项目正在路上。</p>}
   </div>
-  <p class="archive-caption">
-    标有「演示」的项目介绍仅用于展示页面，请按实际进展更新。
-  </p>
+  {projects.some((entry) => entry.data.demo) && (
+    <p class="archive-caption">
+      标有「演示」的项目介绍仅用于展示页面，请按实际进展更新。
+    </p>
+  )}
 </BaseLayout>
