@@ -7,7 +7,7 @@ const { compact = false } = Astro.props;
 
 <div
   class:list={['agent-visual', { compact }]}
-  aria-label="Personal Agent 概念图：上下文、计划、人工确认和执行形成一个循环"
+  aria-label="Personal Agent 当前能力示意：授权来源、确认状态、回答依据与读取评测"
   role="img"
 >
   <div class="visual-top">
@@ -41,23 +41,23 @@ const { compact = false } = Astro.props;
       <small>AGENT</small>
     </div>
     <span class="orbit-node node-context">
-      <span>⌘</span> Context
+      <span>⌘</span> Sources
     </span>
     <span class="orbit-node node-plan">
-      <span>≡</span> Plan
+      <span>≡</span> State
     </span>
     <span class="orbit-node node-review">
-      <span>✓</span> Review
+      <span>✓</span> Evidence
     </span>
     <span class="orbit-node node-build">
-      <span>↗</span> Execute
+      <span>↗</span> Eval
     </span>
-    <span class="visual-coordinate">[ 01 · HUMAN IN THE LOOP ]</span>
+    <span class="visual-coordinate">[ READ ONLY · USER CONFIRMED STATE ]</span>
   </div>
   <div class="visual-bottom">
     <span>
-      <span class="status-dot"></span> 从想法到行动
+      <span class="status-dot"></span> 从资料到可追溯的状态
     </span>
-    <span>concept sketch · v0.1</span>
+    <span>in development · 2026.10</span>
   </div>
 </div>
