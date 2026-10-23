@@ -1,4 +1,4 @@
-/** 发布前优先替换这里。空联系方式不会生成虚假的外链。 */
+/** 站点信息与公开联系方式。 */
 export const site = {
   name: 'JinVx',
   url: 'https://www.jinvx.top', // 站点正式地址；不要带路径
@@ -7,14 +7,15 @@ export const site = {
   language: 'zh-CN',
   author: 'JinVx',
   avatar: '/avatar.png', // 当前为 GitHub 公开头像，可替换 public/avatar.png
-  role: 'Developer · Agent Explorer', // 演示个人定位，请替换
+  role: 'Developer · Agent Explorer',
   intro:
-    '你好，我是 JinVx。正在探索 AI Agent 与 Web 开发，把好奇心变成可以运行的小项目，也把途中的发现认真记下来。', // 演示介绍
+    '正在探索 AI Agent 与 Web 开发，边做项目边记录。平时喜欢足球、音乐和阅读，也想在这里留下一些学习与生活中的想法。',
   tagline: '保持好奇，持续构建。',
   github: 'https://github.com/JinVx-z',
-  email: '', // 填写愿意公开的邮箱
+  wechat: 'zjwlyf-',
+  qq: '2902480395',
   location: '', // 可选公开所在地
-  demoProfile: true, // 替换个人介绍后改为 false，隐藏演示提示
+  demoProfile: false,
   navigation: [
     { label: 'Home', href: '/' },
     { label: 'Projects', href: '/projects/' },

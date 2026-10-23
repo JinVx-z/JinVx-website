@@ -85,7 +85,7 @@ import Icon from '../components/Icon.astro';
       </section>
       <section id="contact">
         <h2>保持联系</h2>
-        <p>如果你也对 Agent、开发或学习感兴趣，欢迎交流。</p>
+        <p>聊技术、聊足球，或是分享音乐和书，都欢迎。</p>
         <div class="contact-grid">
           <div class="contact-item">
             <Icon name="github" size={22} />
@@ -101,16 +101,17 @@ import Icon from '../components/Icon.astro';
             </div>
           </div>
           <div class="contact-item">
-            <Icon name="mail" size={22} />
+            <Icon name="chat" size={22} />
             <div>
-              <h3>Email</h3>
-              {site.email ? (
-                <a class="text-link" href={`mailto:${site.email}`}>
-                  {site.email} ↗
-                </a>
-              ) : (
-                <p>待配置 · 请填写公开联系邮箱</p>
-              )}
+              <h3>微信</h3>
+              <p>{site.wechat}</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <Icon name="chat" size={22} />
+            <div>
+              <h3>QQ</h3>
+              <p>{site.qq}</p>
             </div>
           </div>
         </div>
